@@ -1,0 +1,32 @@
+package dummy;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+public static void main(String[] args) throws IOException {
+	  List<MigationCase> pojoList = new ArrayList<MigationCase>();
+	   BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Jain\\Desktop\\ircpTestFile.txt"));
+	   String line = "";
+	   while((line = br.readLine()) != null) {  
+	       String[] fields = line.split("\\|");
+	       int fieldItemCount=Integer.valueOf(fields[9]);
+	       MigationCase p = new MigationCase(fields[0], fields[1], fields[2],fields[3], fields[4], fields[5],fields[6], fields[7], fields[8],fields[9], fields[10], fields[11],fields[12], fields[13], fields[14],fields[15],fields[16],fields[17]);
+	       List<MigrationAccount> migAcct=new ArrayList<MigrationAccount>();
+	       for(int i=20;i<fieldItemCount+20;i++)
+	       {
+	    	 MigrationAccount migrationAccount=new MigrationAccount(fields[i], fields[i+2], fields[i+3],fields[i+4], fields[i+5], fields[i+6],fields[i+7], fields[i+8],fields[i+9]);  
+	    	 migAcct.add(migrationAccount);
+	       }
+	       p.setListMigrationAccounts(migAcct);
+	       
+	       
+	       
+	       pojoList.add(p);
+	   }
+}
+}
